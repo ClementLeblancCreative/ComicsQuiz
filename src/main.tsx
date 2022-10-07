@@ -28,15 +28,17 @@ const GlobalStyle = createGlobalStyle`
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <Router>
-      <GlobalStyle/>
-        <Header />
-        <Routes>
-          <Route path='/' element={<App />}/>
-          <Route path='/quiz' element={<Quiz />}/> 
-          <Route path='/welcome' element={<Welcome />}/>
-          <Route path='*' element={<Error404 />}/>
-        </Routes>
+    <GlobalStyle/>
+      <Header />
+      <Routes>
+        <Route path='/' element={<App />}/>
+        <Route path='/quiz' element={<Quiz />}/> 
+        <Route path='/welcome' element={<Welcome />}/>
+        <Route path='*' element={<Error404 />}/>
+      </Routes>
+      <footer>
         <Footer />
+      </footer>
     </Router>
   </React.StrictMode>
 )
