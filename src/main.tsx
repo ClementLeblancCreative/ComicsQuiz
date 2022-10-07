@@ -7,18 +7,36 @@ import App from './pages/App'
 import Quiz from './pages/Quiz'
 import Welcome from './pages/Welcome'
 import Error404 from './pages/error404'
+import { createGlobalStyle } from 'styled-components'
+
+const GlobalStyle = createGlobalStyle`
+  *,
+  *:before,
+  *:after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: Calibri, Candara, Segoe, “Segoe UI”, Optima, Arial, sans-serif;
+    background-color: #3ca3a6;
+    color: white;
+  }
+`
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <Router>
-      <Header />
-      <Routes>
-        <Route path='/' element={<App />}/>
-        <Route path='/quiz' element={<Quiz />}/> 
-        <Route path='/welcome' element={<Welcome />}/>
-        <Route path='*' element={<Error404 />}/>
-      </Routes>
-      <Footer />
+      <GlobalStyle/>
+        <Header />
+        <Routes>
+          <Route path='/' element={<App />}/>
+          <Route path='/quiz' element={<Quiz />}/> 
+          <Route path='/welcome' element={<Welcome />}/>
+          <Route path='*' element={<Error404 />}/>
+        </Routes>
+        <Footer />
     </Router>
   </React.StrictMode>
 )
