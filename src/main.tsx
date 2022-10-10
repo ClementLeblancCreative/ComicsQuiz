@@ -31,7 +31,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <GlobalStyle/>
       <Header />
       <Routes>
-        <Route path='/' element={<App />}/>
+        <Route path='/' element={<Welcome />}/>
         <Route path='/quiz' element={<Quiz />}/> 
         <Route path='/welcome' element={<Welcome />}/>
         <Route path='*' element={<Error404 />}/>
