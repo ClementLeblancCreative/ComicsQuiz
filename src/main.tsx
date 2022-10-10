@@ -3,11 +3,12 @@ import ReactDOM from 'react-dom/client'
 import { BrowserRouter as Router, Route,Routes } from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
-import App from './pages/App'
+import Connexion from './pages/Connexion'
 import Quiz from './pages/Quiz'
 import Welcome from './pages/Welcome'
 import Error404 from './pages/error404'
 import { createGlobalStyle } from 'styled-components'
+import Inscription from './pages/Inscription'
 
 const GlobalStyle = createGlobalStyle`
   *,
@@ -18,9 +19,14 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
   }
 
+  ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: white;
+    opacity: 1; /* Firefox */
+  }
+
   body {
     font-family: Calibri, Candara, Segoe, “Segoe UI”, Optima, Arial, sans-serif;
-    background-color: #3ca3a6;
+    background-color: cadetblue;
     color: white;
   }
 `
@@ -33,7 +39,8 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
       <Routes>
         <Route path='/' element={<Welcome />}/>
         <Route path='/quiz' element={<Quiz />}/> 
-        <Route path='/welcome' element={<Welcome />}/>
+        <Route path='/connexion' element={<Connexion />}/>
+        <Route path='/inscription' element={<Inscription />}/>
         <Route path='*' element={<Error404 />}/>
       </Routes>
       <footer>

@@ -7,10 +7,11 @@ const StyledDiv = styled.div`
     height: 65.3vh;
     display: flex;
     align-items: end;
-    justify-content: space-evenly;`
+    justify-content: center;`
 
 const Styledlink = styled(Link)`
     align-self: baseline;
+    margin-inline: 3rem;
     margin-top: 7rem;
     border: solid 1px white;
     padding: 1rem;
