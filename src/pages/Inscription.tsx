@@ -2,6 +2,10 @@ import React from "react"
 import { Link,useNavigate   } from "react-router-dom"
 import styled from 'styled-components'
 import Irnman from '../assets/irnman.png'
+import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { auth } from "../firebase"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const StyledDiv = styled.div`
     height: 65.3vh;
@@ -37,24 +41,43 @@ const StyledButton = styled.button`
     padding-inline: 3rem;
     border: none;
     background-color: crimson;
-    color: white;`
+    color: white;
+    cursor:pointer`
 
+function handleChangemdp(event : any) {
+  motdepasse =  event.target.value;
+}
+
+function handleChangemail(event : any) {
+  mail =  event.target.value;
+}
+
+var mail :string;
+var motdepasse: string;
 function Inscription() {
-  let navigate = useNavigate(); 
-  const Inscit = () =>{ 
-    navigate('/quiz');
-  }
+  let navigate = useNavigate();
+  
+  const inscit = async () =>{ 
+    console.log(mail + motdepasse);
+    await createUserWithEmailAndPassword(auth,mail,motdepasse).then(()=>{
+      navigate('/quiz/0')
+    }
+    ).catch(e=>
+      toast('Verifier vos champs (le mdp doit contenir au moins 6 charactere)'))};
 
   return (
     <React.Fragment>
       <StyledDiv>
+        <ToastContainer />
         <img src={Irnman} alt="wolverine"></img>
         <StyledSousDiv>
           <h3>INSCRIPTION</h3>
-          <StyledIput type="text" placeholder="Pseudo"></StyledIput>
-          <StyledIput type="text" placeholder="Email"></StyledIput>
-          <StyledIput type="password" placeholder="Mot de Passe"></StyledIput>
-          <StyledButton type="button" onClick={Inscit} >Inscription</StyledButton>
+          <form onSubmit={inscit}>
+            <StyledIput type="text" placeholder="Pseudo" required></StyledIput>
+            <StyledIput type="text" placeholder="Email"  value={mail} onChange={handleChangemail} required></StyledIput>
+            <StyledIput type="password" placeholder="Mot de Passe"  value={motdepasse} onChange={handleChangemdp}></StyledIput>
+            <StyledButton type="button" onClick={inscit}>Inscription</StyledButton>
+          </form>
           <StyledHr/>
           <StyledLink to='/connexion'>Déjà Inscrit ? Connectez-vous! </StyledLink>
         </StyledSousDiv>

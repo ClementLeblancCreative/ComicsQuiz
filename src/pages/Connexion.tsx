@@ -2,6 +2,9 @@ import React from "react"
 import { Link,useNavigate   } from "react-router-dom"
 import styled from 'styled-components'
 import Irnman from '../assets/irnman.png'
+import { signInWithEmailAndPassword } from 'firebase/auth'
+import { auth } from "../firebase"
+import { ToastContainer, toast } from 'react-toastify';
 
 const StyledDiv = styled.div`
     height: 65.3vh;
@@ -37,25 +40,40 @@ const StyledButton = styled.button`
     padding-inline: 3rem;
     border: none;
     background-color: crimson;
-    color: white;`
+    color: white;
+    cursor:pointer`
 
 
-  
+    function handleChangemdp(event : any) {
+      motdepasse =  event.target.value;
+    }
+    
+    function handleChangemail(event : any) {
+      mail =  event.target.value;
+    }
+    
+    var mail :string;
+    var motdepasse: string;
+
 function Connexion() {
   let navigate = useNavigate(); 
   const Connect = () =>{ 
-    navigate('/quiz');
-  }
+    signInWithEmailAndPassword(auth,mail,motdepasse).then(()=>
+      navigate('/quiz/0')).catch(e=>
+        toast('Verifier vos champ'))};
 
   return (
     <React.Fragment>
+      <ToastContainer/>
       <StyledDiv>
         <img src={Irnman} alt="wolverine"></img>
         <StyledSousDiv>
           <h3>CONNEXION</h3>
-          <StyledIput type="text" placeholder="Pseudo ou Email"></StyledIput>
-          <StyledIput type="password" placeholder="Mot de Passe"></StyledIput>
-          <StyledButton type="button"onClick={Connect}>Connexion</StyledButton>
+          <form>
+            <StyledIput type="text" placeholder="Email" value={mail} onChange={handleChangemail} required></StyledIput>
+            <StyledIput type="password" placeholder="Mot de Passe" required value={motdepasse} onChange={handleChangemdp}></StyledIput>
+            <StyledButton type="button"onClick={Connect}>Connexion</StyledButton>
+          </form>
           <StyledHr/>
           <StyledLink to='/inscription'>Pas de compte ? Incrivez-vous ! </StyledLink>
         </StyledSousDiv>

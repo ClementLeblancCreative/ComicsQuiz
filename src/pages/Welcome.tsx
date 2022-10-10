@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import styled from 'styled-components'
 import Wolverine from '../assets/wolverin.png'
 
+
 const StyledDiv = styled.div`
     height: 65.3vh;
     display: flex;
