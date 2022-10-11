@@ -9,6 +9,7 @@ import Welcome from './pages/Welcome'
 import Error404 from './pages/error404'
 import { createGlobalStyle } from 'styled-components'
 import Inscription from './pages/Inscription'
+import Resultat from './pages/Resultat'
 const GlobalStyle = createGlobalStyle`
   *,
   *:before,
@@ -39,6 +40,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         <Route path='/quiz/:questionNumber' element={<Quiz />}/> 
         <Route path='/connexion' element={<Connexion />}/>
         <Route path='/inscription' element={<Inscription />}/>
+        <Route path='/results' element={<Resultat />}/>
         <Route path='*' element={<Error404 />}/>
       </Routes>
       <footer>

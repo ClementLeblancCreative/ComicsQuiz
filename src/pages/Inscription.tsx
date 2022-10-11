@@ -38,6 +38,7 @@ const StyledIput = styled.input`
 const StyledButton = styled.button`
     align-self: center;
     padding: 1rem;
+    margin-top: 4rem;
     padding-inline: 3rem;
     border: none;
     background-color: crimson;
@@ -54,16 +55,19 @@ function handleChangemail(event : any) {
 
 var mail :string;
 var motdepasse: string;
+
 function Inscription() {
   let navigate = useNavigate();
   
-  const inscit = async () =>{ 
+  const inscit = async (event : any) =>{
+    event.preventDefault(); 
     console.log(mail + motdepasse);
     await createUserWithEmailAndPassword(auth,mail,motdepasse).then(()=>{
       navigate('/quiz/0')
     }
     ).catch(e=>
-      toast('Verifier vos champs (le mdp doit contenir au moins 6 charactere)'))};
+      toast('Verifier vos champs (le mdp doit contenir au moins 6 charactere)'))
+    return false};
 
   return (
     <React.Fragment>
@@ -73,10 +77,10 @@ function Inscription() {
         <StyledSousDiv>
           <h3>INSCRIPTION</h3>
           <form onSubmit={inscit}>
-            <StyledIput type="text" placeholder="Pseudo" required></StyledIput>
-            <StyledIput type="text" placeholder="Email"  value={mail} onChange={handleChangemail} required></StyledIput>
-            <StyledIput type="password" placeholder="Mot de Passe"  value={motdepasse} onChange={handleChangemdp}></StyledIput>
-            <StyledButton type="button" onClick={inscit}>Inscription</StyledButton>
+            <StyledIput type="text" placeholder="Pseudo" autoComplete="off" required></StyledIput>
+            <StyledIput type="text" placeholder="Email"  value={mail} onChange={handleChangemail} autoComplete="off" required></StyledIput>
+            <StyledIput type="password" placeholder="Mot de Passe"  value={motdepasse} onChange={handleChangemdp} autoComplete="offf" required></StyledIput>
+            <StyledButton type="submit">Inscription</StyledButton>
           </form>
           <StyledHr/>
           <StyledLink to='/connexion'>Déjà Inscrit ? Connectez-vous! </StyledLink>

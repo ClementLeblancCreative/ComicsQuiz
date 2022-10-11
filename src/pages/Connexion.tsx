@@ -27,7 +27,7 @@ const StyledLink = styled(Link)`
     color: white;`
 
 const StyledIput = styled.input`
-  width: 100%;
+    width: 100%;
     padding: 1rem;
     background: none;
     border: none;
@@ -41,7 +41,8 @@ const StyledButton = styled.button`
     border: none;
     background-color: crimson;
     color: white;
-    cursor:pointer`
+    cursor:pointer;
+    margin-top: 4rem`
 
 
     function handleChangemdp(event : any) {
@@ -57,7 +58,8 @@ const StyledButton = styled.button`
 
 function Connexion() {
   let navigate = useNavigate(); 
-  const Connect = () =>{ 
+  const Connect = (event :any) =>{
+    event.preventDefault();
     signInWithEmailAndPassword(auth,mail,motdepasse).then(()=>
       navigate('/quiz/0')).catch(e=>
         toast('Verifier vos champ'))};
@@ -69,10 +71,10 @@ function Connexion() {
         <img src={Irnman} alt="wolverine"></img>
         <StyledSousDiv>
           <h3>CONNEXION</h3>
-          <form>
-            <StyledIput type="text" placeholder="Email" value={mail} onChange={handleChangemail} required></StyledIput>
-            <StyledIput type="password" placeholder="Mot de Passe" required value={motdepasse} onChange={handleChangemdp}></StyledIput>
-            <StyledButton type="button"onClick={Connect}>Connexion</StyledButton>
+          <form onSubmit={Connect}>
+            <StyledIput type="text" placeholder="Email" value={mail} onChange={handleChangemail} autoComplete="off" required></StyledIput>
+            <StyledIput type="password" placeholder="Mot de Passe" value={motdepasse} onChange={handleChangemdp} autoComplete="off" required></StyledIput>
+            <StyledButton type="submit" >Connexion</StyledButton>
           </form>
           <StyledHr/>
           <StyledLink to='/inscription'>Pas de compte ? Incrivez-vous ! </StyledLink>
